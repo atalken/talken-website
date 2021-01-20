@@ -1,0 +1,18 @@
+---
+title: "Anna Talken"
+image: "anna_talken.jpg"
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/anna-talken-9540b3b2/"
+  - label: Instagram
+    url: "https://www.instagram.com/surf_sci/"
+  - label: GitHub
+    url: "https://github.com/atalken"
+  - label: Email
+    url: "atalken@ucsb.edu"
+output:
+  postcards::jolla
+site: distill::distill_website
+---
+ 
+I am a first year Master's student at the Bren School of Environmental Science and Management.
