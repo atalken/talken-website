@@ -16,4 +16,4 @@ output:
 site: distill::distill_website
 ---
  
-I am a first year Master's student at the Bren School of Environmental Science and Management.
+Anna is a first year Master's student at the Bren School of Environmental Science and Management, specializing in Coastal Marine Resources Management. 
