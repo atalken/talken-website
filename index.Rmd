@@ -1,6 +1,6 @@
 ---
 title: "Anna Talken"
-image: "anna_talken.jpg"
+image: "talken.jpg"
 links:
   - label: LinkedIn
     url: "https://www.linkedin.com/in/anna-talken-9540b3b2/"
