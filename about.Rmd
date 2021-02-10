@@ -1,10 +1,13 @@
 ---
-title: "About this site"
+title: "About"
 description: |
-  Some additional details about the website
+  Combining data science and environmental protection
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+Anna is currently a master’s student in Environmental Science and Management at UCSB, specializing in Coastal Marine Resources Management with a focus in Environmental Communication. In her free time, Anna enjoys surfing, backpacking, shaping surfboards and and hiking with her dog. 
+
+This website contains some examples of environmental data analysis projects that I have worked on using R programming. Please reach out if you would like to chat or collaborate!  
