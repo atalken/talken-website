@@ -12,5 +12,5 @@ navbar:
     - text: "Blog"
       href: blog.html
     - text: "CV"
-    - href: talken_cv.html
+      href: talken_cv/talken_cv.pdf
 output: distill::distill_article
