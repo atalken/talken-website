@@ -1,10 +1,10 @@
 ---
-title: "Logistic Regression"
+title: "Binary Logistic Regression and Modeling"
 description: |
   Logistic Regression 
 author:
   - name: Anna Talken
-date: 02-22-2021
+date: 02-08-2021
 output:
   distill::distill_article:
     self_contained: false
