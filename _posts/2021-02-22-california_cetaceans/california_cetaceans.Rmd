@@ -1,0 +1,73 @@
+---
+title: "Cetacean Occurence off the California Coast"
+description: |
+  This report explores the probability of Cetaceans occuring in various locations along the California coast. I created a map of species richness based on raster data from Kaschner, et. al 2016 that calculated the probability of 35 species of Cetaceans being present along the California coast. I used a 60% probability threshold to mark whether a Cetacean species would likely be 'present' on the map or not.
+author:
+  - name: Anna Talken
+date: 02-22-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(raster)
+library(tidyverse)
+library(here)
+library(sf)
+library(fasterize)
+library(rnaturalearth)
+```
+
+
+```{r}
+#Reading in raster data and wrangling 
+
+my_files <- list.files(path = "ca_cetaceans", full.names = TRUE) #combined all the tifs in cetacean folder into one file path
+
+cetacean_stack <- raster::stack(my_files) #stacked all the files
+
+#setting a threshold so that the probability of occurence has to be above 0.6 for the species to be considered 'present' 
+c_threshold <- function(x,thresh = 0.6) {
+  y <- ifelse(x >= thresh, 1, NA)
+  return(y)
+}
+
+#using threshold function on raster stack 
+cetacean_cal <- raster::calc(cetacean_stack, fun = c_threshold)
+
+#finding the sum of all the raster layers to combine into one layer displaying species richness
+cetacean_richness <- sum(cetacean_cal, na.rm = TRUE)
+
+#adding the California coastline as an sf using the rnaturalearth package
+cal_coast <- ne_coastline(scale = 10, returnclass = "sf")
+
+```
+
+
+```{r, fig.cap = "Figure 1. The probability of occurence for 35 different species of Cetaceans along the California coast based on environmental suitability. A threshold of 60% probability was used to determine if a species will be 'present' on the map."}
+#creating ggplot map
+
+#converts species richness raster into a data frame
+cetacean_df <- raster::rasterToPoints(cetacean_richness) %>% 
+  as.data.frame(na.rm = TRUE)
+
+ggplot() +
+  geom_raster(data = cetacean_df, aes(x = x, y = y, fill = layer)) +
+  geom_sf(data = cal_coast) +
+  coord_sf(xlim = c(-125, -115),
+           ylim = c(32, 38)) +
+  scale_fill_gradient(low = "white",
+                      high = "#00798c") +
+  theme_minimal() +
+  labs(title = "The probabability of Cetacean occurence along the California Coast")
+```
+
+
+### Data Citation
+
+Kaschner, K., Rius-Barile, J., Kesner-Reyes, K., Garilao, C., Kullander, S., Rees, T., & Froese, R. (2016). AquaMaps: Predicted range maps for aquatic species. www.aquamaps.org
+
+

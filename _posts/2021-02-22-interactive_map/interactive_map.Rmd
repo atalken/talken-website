@@ -1,0 +1,88 @@
+---
+title: "Oil Spills in California"
+description: |
+  An interactive map and chloreopath of oil spills in California in 2008. 
+author:
+  - name: Anna Talken
+date: 02-22-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+
+```{r setup, warning=FALSE, message = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(sf)
+library(here)
+library(tmap)
+```
+
+## Summary
+
+In this report, I am analyzing the documented oil spills that occurred in California in 2008. I created an interactive map that illustrates each individual oil spill in every county throughout the state. A chloreopath shows the density of the number of oil spills in each county, which highlights Los Angeles County as having the greatest number of oil spills in 2008. Data for CA oil spills is from CAOpenData, Department of Fish and Wildlife.
+
+```{r, warning=FALSE, message = FALSE}
+#read in the data
+ca_counties <- read_sf(here("_posts", "2021-02-22-interactive_map", "ca_counties", "CA_Counties_TIGER2016.shp"))
+
+# Wrangling
+
+ca_subset <- ca_counties %>% 
+  select(NAME, ALAND) %>% #keeping only county name and land area, but since it is a simple feature object, it keeps the spatial information (column geometry)
+  rename(county_name = NAME, land_area = ALAND)
+
+
+# Add the oil spill data
+
+oil_spill <-read_sf(here("_posts", "2021-02-22-interactive_map", "Oil_Spill_Incident_Tracking_%5Bds394%5D-shp", "Oil_Spill_Incident_Tracking_%5Bds394%5D.shp"))
+```
+
+
+```{r, warning=FALSE, message = FALSE, include=FALSE}
+# Plot the California counties using geom_sf()
+
+ggplot(data = ca_subset) +
+  geom_sf(aes(fill = land_area), color = "white", size = 0.1) +
+  theme_void() +
+  scale_fill_gradientn(colors = c("cyan4", "blue", "purple"))
+```
+
+
+```{r, warning=FALSE, message = FALSE, include=FALSE}
+# Plot them together
+ggplot() +
+  geom_sf(data = ca_subset) +
+  geom_sf(data = oil_spill, size = 1, color = "red")
+```
+
+## Interactive Map of Oil Spills in CA in 2008
+```{r, warning=FALSE, message = FALSE}
+tmap_mode(mode = "view") 
+  
+tm_shape(ca_subset) +
+  tm_fill("land_area", palette = "BuGn") +
+  tm_shape(oil_spill) +
+  tm_dots(col = "black")
+```
+
+
+## Chloreopath of Oil Spills In CA in 2008
+
+```{r, warning=FALSE, message = FALSE}
+# finding number of oil spills per county
+
+ca_oil_spills <- ca_subset %>% 
+  st_join(oil_spill)
+
+oil_counts <- ca_oil_spills %>% 
+  count(county_name)
+
+ggplot(data = oil_counts) +
+  geom_sf(aes(fill = n), color = "black", size = 0.2) +
+  scale_fill_gradientn(colors = c("lightgray", "yellow", "red")) +
+  theme_minimal() +
+  labs(title = "Number of oil spills across counties in California in 2008",
+       fill = "Number of oil spills")
+```

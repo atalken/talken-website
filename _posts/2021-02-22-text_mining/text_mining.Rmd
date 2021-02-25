@@ -1,0 +1,138 @@
+---
+title: 'Text Mining: Harry Potter'
+description: |
+ A text mining analysis of _Harry Potter and the Prisoner of Azkaban._ These data visualizations illustrate word frequency throughout each chapter, a wordcloud of the most used words in the first chapter and finally a lexicon is used to determine the positive and negative sentiments associated with words throughout the book.
+author:
+  - name: Anna Talken
+date: 02-22-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+    theme: paper
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(tidytext)
+library(textdata)
+library(pdftools)
+library(ggwordcloud)
+library(words2number)
+library(patchwork)
+```
+
+## Summary
+
+In this report, I am analyzing the text _Harry Potter and the Prisoner of Azkaban._ Data wrangling was done using Tidy Text to format the PDF into a tidy data frame in order to analyze word frequency and sentiments. The first analysis looks at the frequency of the top 5 words used in each chapter. The next analysis consists of a word cloud that illustrates the top 50 words used just in the first chapter of the book. Finally, a sentiment analysis was done to determine the average rating of words used in each chapter based on the affin lexicon that gives a numeric value to words based on how positive or negative they are.
+
+
+```{r, cache=TRUE, warning = FALSE, message = FALSE}
+# read in the pdf
+
+harry_potter_text <- pdf_text("harry_potter.pdf")
+
+#turn the pdf into a dataframe
+
+potter_tidy <- data.frame(harry_potter_text) %>% 
+  mutate(text_full = str_split(harry_potter_text, pattern = '\\n')) %>% 
+  unnest(text_full) %>% 
+  mutate(text_full = str_trim(text_full)) %>% 
+  mutate(text_full = str_squish(text_full))
+
+#remove lines that start with 'Page' or 'Get free' to get rid of lines that have the page number and the free ebook line...
+  x = grepl("Page|Get free", potter_tidy$text_full)
+potter_new_tidy <- potter_tidy[!x,] 
+
+
+potter_df <- potter_new_tidy %>% 
+  slice(-(1:2)) %>% # removing rows 1-3 to start at Chapter 1 on page 3
+  mutate(chapter = case_when(str_detect(text_full, pattern = "CHAPTER") ~ text_full, 
+    TRUE ~ NA_character_
+  )) %>% # creates a new column called 'chapter' where if I detect in the text_full column the pattern 'Chapter', then exactly what is in the existing column will be in the new 'Chapter' column, everything else that doesnt have 'chapter' is considered NA in the new column
+  fill(chapter) %>% #fills every NA value with the chapter above it
+  mutate(chapter = str_replace_all(chapter, pattern = "Dumbledore from", replacement = "CHAPTER NINE")) %>% 
+  separate(col = chapter, into = c("ch", "no"), sep = " "
+           ) %>% #separate chapter column in "ch" and "no" separated by a space " "
+  mutate(chapter = tolower(no)) %>% 
+  mutate(chapter = str_remove_all(chapter, "[[:punct:]]"))
+```
+
+
+```{r, warning = FALSE, message = FALSE}
+potter_new_df2 <- potter_df %>% 
+  mutate(chapter = to_number(chapter))
+```
+
+
+
+```{r, warning = FALSE, message = FALSE, fig.cap= "Figure 1. Column graphs illustrating the frequency of the top 5 words used in each chapter of Harry Potter and the Prisoner of Azkaban."}
+potter_tokens <- potter_new_df2 %>% 
+  unnest_tokens(word, text_full) %>% #creates new column called 'word' that unnests tokens from 'text_full"
+  dplyr::select(-harry_potter_text) # get rid of harry_potter_text column
+
+#Remove stop words
+potter_nonstop_words <-potter_tokens %>% 
+  anti_join(stop_words) #get rid of all stop words
+
+nonstop_counts <- potter_nonstop_words %>% 
+  count(chapter, word)
+
+
+#find top 5 words for each chapter
+top_5_words <- nonstop_counts %>% 
+  group_by(chapter) %>% 
+  arrange(-n) %>% #arranges from most to least
+  slice(1:5)
+
+ggplot(data = top_5_words, aes(x = word, y = n)) +
+  geom_col(fill = "cyan4") +
+  facet_wrap(~chapter, scales = "free") + coord_flip() + #scales = free means that the scale for each graph does NOT need to be the same
+  theme_minimal() +
+  labs(title = "Frequency of the top 5 words used in each chapter of Harry Potter and the \n Prisoner of Azkaban",
+       x = "Most used words",
+       y = "Number of times the word was used") +
+  theme(
+    plot.title = element_text(hjust = 0.2, size = 14))
+```
+
+```{r, warning = FALSE, message = FALSE, fig.cap = "Figure 2. The top 50 words used in the first chapter of Harry Potter and the Prisoner of Azkaban. Larger sized words indicate they were used at a higher frequency."}
+ch1_top50 <- nonstop_counts %>%  
+  filter(chapter == 1) %>% 
+  arrange(-n) %>% 
+  slice(1:50)
+
+ggplot(data = ch1_top50, aes(label = word)) +
+  geom_text_wordcloud(aes(color = n, size = n)) +
+  scale_size_area(max_size = 10) +
+  theme_minimal() +
+  labs(title = "The top 50 words used in Chapter 1 of Harry Potter and the \n Prisoner of Azkaban") +
+   theme(
+    plot.title = element_text(hjust = 0.4, size = 14))
+
+```
+
+```{r, message = FALSE, warning = FALSE, fig.cap= "Figure 3. A sentiment analysis of the words used in each chapter of Harry Potter and the Prisoner of Azkaban. Mean values of the affin lexicon of the each chapter's words were found and used to determine the mean sentiment score per chapter. Lower numbers correspond to words that have been rated more negatively and higher affin scores represent more positive words."}
+#Sentiment Analysis
+potter_afinn <- potter_nonstop_words %>% 
+  inner_join(get_sentiments("afinn"))
+
+afinn_counts <- potter_afinn %>% 
+  count(chapter, value)
+
+afinn_means <- potter_afinn %>% 
+  group_by(chapter) %>% 
+  summarize(mean_afinn = mean(value))
+
+ggplot(data = afinn_means, aes(x = chapter, y = mean_afinn)) +
+  geom_col(fill = "darkseagreen3") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Sentiment Analysis of the Words Used in Harry Potter and the \n Prisoner of Azkaban",
+       y = "Affin sentiment score",
+       x = "Chapter") +
+   theme(
+    plot.title = element_text(hjust = 0.3, size = 14))
+```
