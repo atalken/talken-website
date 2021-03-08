@@ -6,21 +6,28 @@
       "description": "Combining data science and environmental protection",
       "author": [],
       "contents": "\nAnna is currently a master’s student in Environmental Science and Management at UCSB, specializing in Coastal Marine Resources Management with a focus in Environmental Communication. In her free time, Anna enjoys surfing, backpacking, shaping surfboards and and hiking with her dog.\nThis website contains some examples of environmental data analysis projects that I have worked on using R programming. Please reach out if you would like to chat or collaborate!\n\n\n\n",
-      "last_modified": "2021-02-24T22:51:51-08:00"
+      "last_modified": "2021-03-08T13:32:00-08:00"
     },
     {
       "path": "blog.html",
       "title": "Projects",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-02-24T22:51:52-08:00"
+      "last_modified": "2021-03-08T13:32:01-08:00"
     },
     {
       "path": "index.html",
       "title": "Anna Talken",
       "author": [],
-      "contents": "\n\n          \n      \n      Anna Talken's Website\n      \n      \n      Home\n      About\n      Projects\n      CV\n      ☰\n      \n      \n      \n        \n          \n            Anna Talken\n          \n          \n            \n              Anna is a first year Master’s student at the Bren School of Environmental Science and Management, specializing in Coastal Marine Resources Management. With a background in marine science research and science writing, Anna is passionate about protecting our oceans and communicating scientific concepts to the public.\n            \n            \n              Anna is a first year Master’s student at the Bren School of Environmental Science and Management, specializing in Coastal Marine Resources Management. With a background in marine science research and science writing, Anna is passionate about protecting our oceans and communicating scientific concepts to the public.\n            \n          \n\n          \n            \n              \n                  \n                    \n                      LinkedIn\n                    \n                  \n                \n                                \n                  \n                    \n                      Instagram\n                    \n                  \n                \n                                \n                  \n                    \n                      GitHub\n                    \n                  \n                \n                                \n                  \n                    \n                      Email\n                    \n                  \n                \n                              \n          \n\n          \n            \n              \n                                \n                  \n                    LinkedIn\n                  \n                \n                                \n                  \n                    Instagram\n                  \n                \n                                \n                  \n                    GitHub\n                  \n                \n                                \n                  \n                    Email\n                  \n                \n                              \n            \n          \n        \n      \n    \n\n    \n    \n    ",
-      "last_modified": "2021-02-24T22:51:53-08:00"
+      "contents": "\n\n          \n      \n      Anna Talken's Website\n      \n      \n      Home\n      About\n      Projects\n      Resume\n      ☰\n      \n      \n      \n        \n          \n            Anna Talken\n          \n          \n            \n              Anna is a first year Master’s student at the Bren School of Environmental Science and Management, specializing in Coastal Marine Resources Management. With a background in marine science research and science writing, Anna is passionate about protecting our oceans and communicating scientific concepts to the public.\n            \n            \n              Anna is a first year Master’s student at the Bren School of Environmental Science and Management, specializing in Coastal Marine Resources Management. With a background in marine science research and science writing, Anna is passionate about protecting our oceans and communicating scientific concepts to the public.\n            \n          \n\n          \n            \n              \n                  \n                    \n                      LinkedIn\n                    \n                  \n                \n                                \n                  \n                    \n                      Instagram\n                    \n                  \n                \n                                \n                  \n                    \n                      GitHub\n                    \n                  \n                \n                                \n                  \n                    \n                      Email\n                    \n                  \n                \n                              \n          \n\n          \n            \n              \n                                \n                  \n                    LinkedIn\n                  \n                \n                                \n                  \n                    Instagram\n                  \n                \n                                \n                  \n                    GitHub\n                  \n                \n                                \n                  \n                    Email\n                  \n                \n                              \n            \n          \n        \n      \n    \n\n    \n    \n    ",
+      "last_modified": "2021-03-08T13:32:01-08:00"
+    },
+    {
+      "path": "resume.html",
+      "title": "Anna Talken's Resume",
+      "author": [],
+      "contents": "\n\n\n\n\n\n",
+      "last_modified": "2021-03-08T13:32:01-08:00"
     }
   ],
   "collections": ["posts/posts.json"]
