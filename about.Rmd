@@ -1,13 +1,16 @@
 ---
 title: "About"
-description: |
-  Combining data science and environmental protection
+image: "IMG_1716.jpg"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Anna is currently a master’s student in Environmental Science and Management at UCSB, specializing in Coastal Marine Resources Management with a focus in Environmental Communication. In her free time, Anna enjoys surfing, backpacking, shaping surfboards and and hiking with her dog. 
+Hi, I'm Anna. I enjoy hearing people’s stories, making things, spending time outside and I’ve never had a bad day wearing a bucket hat. Before starting my Master’s in Environmental Science and Management at UCSB's Bren School, I worked as the Sustainability Assistant for an environmental nonprofit, where I managed the San Luis Obispo County Green Business Program, created content for sustainability outreach material and organized environmental networking events.  I also worked as a science writer for the California Marine Sanctuary, where I wrote articles focused on a variety of marine science topics -- such as kelp restoration in Northern California and the role of indigenous peoples in marine conservation -- as well as created webpages for California's Marine Protected Areas. I am a very curious person and have always had a passion for the outdoors and for communicating the importance of protecting it to the public. 
 
-This website contains some examples of environmental data analysis projects that I have worked on using R programming. Please reach out if you would like to chat or collaborate!  
+I believe data visualization can be a powerful way to simply explain various areas of scientific research, and shed some light on the amazing scientific research being done. There is a lack of comprehensible communication between the science community and the general public, and I hope to bridge that gap. My background in science, data analysis and communication has given me the tools to learn and interpret research and data in many fields. This website contains some examples of environmental data analysis projects that I have worked on using R programming.
+
+In my free time, you can find me in the ocean, shaping surfboards, attempting to garden or hiking in the mountains with my furry friend. 
+
+Please reach out if you would like to chat or collaborate!  
