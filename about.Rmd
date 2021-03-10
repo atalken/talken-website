@@ -1,11 +1,16 @@
 ---
 title: "About"
-image: "IMG_1716.jpg"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+![](IMG_1716.jpg)
+
+
+
+
 
 Hi, I'm Anna. I enjoy hearing people’s stories, making things, spending time outside and I’ve never had a bad day wearing a bucket hat. Before starting my Master’s in Environmental Science and Management at UCSB's Bren School, I worked as the Sustainability Assistant for an environmental nonprofit, where I managed the San Luis Obispo County Green Business Program, created content for sustainability outreach material and organized environmental networking events.  I also worked as a science writer for the California Marine Sanctuary, where I wrote articles focused on a variety of marine science topics -- such as kelp restoration in Northern California and the role of indigenous peoples in marine conservation -- as well as created webpages for California's Marine Protected Areas. I am a very curious person and have always had a passion for the outdoors and for communicating the importance of protecting it to the public. 
 
