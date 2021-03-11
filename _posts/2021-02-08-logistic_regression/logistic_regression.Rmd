@@ -1,7 +1,7 @@
 ---
 title: "Binary Logistic Regression and Modeling"
 description: |
-  Logistic Regression 
+  This report explores Palmetto data from Florida and utilizes binary logistic regression and modeling to predict Palmetto species based on a variety of factors. 
 author:
   - name: Anna Talken
 date: 02-08-2021

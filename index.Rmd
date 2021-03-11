@@ -1,5 +1,4 @@
 ---
-title: "Anna Talken"
 image: "talken.jpg"
 links:
   - label: LinkedIn
@@ -15,5 +14,6 @@ output:
   
 site: distill::distill_website
 ---
- 
+ Welcome!
+
 Anna is a first year Master's student at the Bren School of Environmental Science and Management, specializing in Coastal Marine Resources Management with a focus in Environmental Communication and Media. With a background in marine science research and science writing, Anna is passionate about protecting our oceans and communicating scientific concepts to the public. 

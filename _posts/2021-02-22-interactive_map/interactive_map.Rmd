@@ -1,7 +1,7 @@
 ---
 title: "Oil Spills in California"
 description: |
-  An interactive map and chloreopath of oil spills in California in 2008. 
+  This report presents an exploration of oil spills in California recorded in 2008, including an interactive map and chloreopath of oil spills illustrating the number of oil spills in each county. 
 author:
   - name: Anna Talken
 date: 02-22-2021
@@ -17,6 +17,7 @@ library(tidyverse)
 library(sf)
 library(here)
 library(tmap)
+library(spdep)
 ```
 
 ## Summary
@@ -25,7 +26,7 @@ In this report, I am analyzing the documented oil spills that occurred in Califo
 
 ```{r, warning=FALSE, message = FALSE}
 #read in the data
-ca_counties <- read_sf(here("_posts", "2021-02-22-interactive_map", "ca_counties", "CA_Counties_TIGER2016.shp"))
+ca_counties <- st_read(here("_posts", "2021-02-22-interactive_map", "ca_counties", "CA_Counties_TIGER2016.shp"))
 
 # Wrangling
 
@@ -36,7 +37,7 @@ ca_subset <- ca_counties %>%
 
 # Add the oil spill data
 
-oil_spill <-read_sf(here("_posts", "2021-02-22-interactive_map", "Oil_Spill_Incident_Tracking_%5Bds394%5D-shp", "Oil_Spill_Incident_Tracking_%5Bds394%5D.shp"))
+oil_spill <-st_read(here("_posts", "2021-02-22-interactive_map", "Oil_Spill_Incident_Tracking_%5Bds394%5D-shp", "Oil_Spill_Incident_Tracking_%5Bds394%5D.shp"))
 ```
 
 

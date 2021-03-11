@@ -1,5 +1,5 @@
 name: "."
-title: "Anna Talken's Website"
+title: "Anna Talken"
 description: |
   Anna's Website
 output_dir: "docs"
@@ -13,4 +13,6 @@ navbar:
       href: blog.html
     - text: "Resume"
       href: resume.html
+  search: false
 output: distill::distill_article
+theme: anna_theme.css
